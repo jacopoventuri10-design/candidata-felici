@@ -1,1132 +1,875 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Elena Rossi — Candidatura CNAM · Comparto Accademie di Belle Arti</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
-  
-  <style>
-    /* =========================================
-       VARIABILI DI DESIGN (MODIFICA QUI COLORI E FONT)
-       ========================================= */
-    :root {
-      --bg-primary: #FAF9F6;
-      --bg-secondary: #F1EFEA;
-      --bg-card: #FFFFFF;
-      --text-main: #18181B;
-      --text-muted: #52525B;
-      --accent: #1E3A8A;       /* Blu istituzionale */
-      --accent-light: #DBEAFE;
-      --accent-warm: #B45309;  /* Dettaglio caldo */
-      --border: #E4E4E7;
-      --font-sans: 'Inter', -apple-system, sans-serif;
-      --font-serif: 'Newsreader', Georgia, serif;
-      --radius: 12px;
-      --max-width: 1140px;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      font-family: var(--font-sans);
-      color: var(--text-main);
-      background-color: var(--bg-primary);
-      line-height: 1.6;
-    }
-
-    body {
-      overflow-x: hidden;
-    }
-
-    .container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    /* =========================================
-       HEADER & NAVIGAZIONE
-       ========================================= */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(250, 249, 246, 0.9);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .header-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: 72px;
-    }
-
-    .brand {
-      text-decoration: none;
-      color: var(--text-main);
-      display: flex;
-      flex-direction: column;
-    }
-
-    .brand strong {
-      font-size: 1.05rem;
-      letter-spacing: -0.02em;
-    }
-
-    .brand span {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-    }
-
-    nav {
-      display: flex;
-      gap: 20px;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: var(--text-muted);
-      font-size: 0.875rem;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-
-    nav a:hover {
-      color: var(--accent);
-    }
-
-    @media (max-width: 860px) {
-      nav { display: none; }
-    }
-
-    /* =========================================
-       HERO SECTION
-       ========================================= */
-    .hero {
-      padding: 80px 0 64px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.3fr 0.9fr;
-      gap: 48px;
-      align-items: start;
-    }
-
-    .eyebrow {
-      display: inline-block;
-      font-size: 0.8rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--accent);
-      margin-bottom: 16px;
-    }
-
-    .hero h1 {
-      font-family: var(--font-serif);
-      font-size: clamp(2.4rem, 4.5vw, 3.6rem);
-      font-weight: 400;
-      line-height: 1.12;
-      letter-spacing: -0.02em;
-      margin-bottom: 24px;
-    }
-
-    .hero h1 em {
-      font-style: italic;
-      color: var(--accent);
-    }
-
-    .hero p {
-      font-size: 1.1rem;
-      color: var(--text-muted);
-      margin-bottom: 32px;
-      max-width: 60ch;
-    }
-
-    .btn-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      padding: 12px 22px;
-      border-radius: 8px;
-      font-size: 0.9rem;
-      font-weight: 500;
-      text-decoration: none;
-      transition: all 0.2s;
-    }
-
-    .btn-primary {
-      background: var(--accent);
-      color: #FFF;
-    }
-
-    .btn-primary:hover {
-      background: #172554;
-    }
-
-    .btn-secondary {
-      background: var(--bg-card);
-      color: var(--text-main);
-      border: 1px solid var(--border);
-    }
-
-    .btn-secondary:hover {
-      border-color: var(--text-main);
-    }
-
-    .profile-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 28px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-    }
-
-    .profile-card h2 {
-      font-size: 1.35rem;
-      margin-bottom: 4px;
-    }
-
-    .profile-role {
-      font-size: 0.9rem;
-      color: var(--accent);
-      font-weight: 500;
-      margin-bottom: 20px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .tag-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .tag-item {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      padding-left: 14px;
-      border-left: 2px solid var(--accent-light);
-    }
-
-    @media (max-width: 860px) {
-      .hero-grid { grid-template-columns: 1fr; }
-    }
-
-    /* =========================================
-       BARRA NUMERI (CONTATORI)
-       ========================================= */
-    .stats-bar {
-      background: var(--bg-secondary);
-      border-bottom: 1px solid var(--border);
-      padding: 40px 0;
-    }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-    }
-
-    .stat-box .num {
-      font-family: var(--font-serif);
-      font-size: 2.75rem;
-      font-weight: 600;
-      color: var(--accent);
-      line-height: 1;
-      margin-bottom: 8px;
-    }
-
-    .stat-box .label {
-      font-size: 0.875rem;
-      color: var(--text-muted);
-      line-height: 1.4;
-    }
-
-    @media (max-width: 768px) {
-      .stats-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    /* =========================================
-       SEZIONI GENERICHE
-       ========================================= */
-    section {
-      padding: 80px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    section h2.section-title {
-      font-family: var(--font-serif);
-      font-size: clamp(1.8rem, 3vw, 2.5rem);
-      font-weight: 400;
-      line-height: 1.2;
-      margin-bottom: 20px;
-    }
-
-    .lead {
-      font-size: 1.05rem;
-      color: var(--text-muted);
-      max-width: 68ch;
-      margin-bottom: 40px;
-    }
-
-    /* =========================================
-       CHI SONO & COMPETENZE
-       ========================================= */
-    .bio-grid {
-      display: grid;
-      grid-template-columns: 1.1fr 1fr;
-      gap: 48px;
-    }
-
-    .bio-text p {
-      margin-bottom: 16px;
-      color: var(--text-muted);
-    }
-
-    .skills-panel {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 28px;
-    }
-
-    .skills-panel h3 {
-      font-size: 1.15rem;
-      margin-bottom: 8px;
-    }
-
-    .skills-panel > p {
-      font-size: 0.875rem;
-      color: var(--text-muted);
-      margin-bottom: 20px;
-    }
-
-    .skill-item {
-      padding: 12px 0;
-      border-top: 1px solid var(--border);
-      display: flex;
-      flex-direction: column;
-    }
-
-    .skill-item strong {
-      font-size: 0.92rem;
-      color: var(--text-main);
-    }
-
-    .skill-item span {
-      font-size: 0.84rem;
-      color: var(--text-muted);
-    }
-
-    @media (max-width: 860px) {
-      .bio-grid { grid-template-columns: 1fr; }
-    }
-
-    /* =========================================
-       CARDS ESPERIENZA
-       ========================================= */
-    .cards-3 {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      margin-bottom: 32px;
-    }
-
-    .info-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 24px;
-    }
-
-    .info-card .card-head {
-      font-weight: 700;
-      font-size: 1.1rem;
-      margin-bottom: 4px;
-    }
-
-    .info-card .card-sub {
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--accent);
-      margin-bottom: 12px;
-    }
-
-    .info-card p {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-    }
-
-    .highlight-banner {
-      background: var(--accent);
-      color: #FFF;
-      border-radius: var(--radius);
-      padding: 32px;
-      display: grid;
-      grid-template-columns: 220px 1fr;
-      gap: 32px;
-      align-items: center;
-    }
-
-    .highlight-banner .year-big {
-      font-family: var(--font-serif);
-      font-size: 2.2rem;
-      line-height: 1.1;
-    }
-
-    .highlight-banner small {
-      display: block;
-      font-family: var(--font-sans);
-      font-size: 0.85rem;
-      opacity: 0.8;
-      margin-top: 6px;
-    }
-
-    @media (max-width: 860px) {
-      .cards-3 { grid-template-columns: 1fr; }
-      .highlight-banner { grid-template-columns: 1fr; gap: 16px; }
-    }
-
-    /* =========================================
-       PROGRAMMA A TAB (5 PILASTRI)
-       ========================================= */
-    .tabs-nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 24px;
-    }
-
-    .tab-btn {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      padding: 10px 18px;
-      border-radius: 99px;
-      font-family: var(--font-sans);
-      font-size: 0.875rem;
-      font-weight: 500;
-      color: var(--text-muted);
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .tab-btn:hover {
-      border-color: var(--accent);
-      color: var(--text-main);
-    }
-
-    .tab-btn.active {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #FFF;
-    }
-
-    .tab-panel {
-      display: none;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 36px;
-      grid-template-columns: 1.4fr 0.8fr;
-      gap: 36px;
-      align-items: start;
-    }
-
-    .tab-panel.active {
-      display: grid;
-    }
-
-    .tab-panel h3 {
-      font-family: var(--font-serif);
-      font-size: 1.75rem;
-      font-weight: 400;
-      margin-bottom: 20px;
-    }
-
-    .tab-panel h3 span {
-      color: var(--accent);
-      font-style: italic;
-    }
-
-    .tab-panel ul {
-      padding-left: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      color: var(--text-muted);
-    }
-
-    .quote-box {
-      background: var(--bg-secondary);
-      padding: 24px;
-      border-radius: 8px;
-      border-left: 3px solid var(--accent);
-      font-size: 0.92rem;
-      color: var(--text-muted);
-    }
-
-    .quote-box strong {
-      display: block;
-      font-family: var(--font-serif);
-      font-size: 1.15rem;
-      color: var(--text-main);
-      margin-bottom: 8px;
-    }
-
-    @media (max-width: 860px) {
-      .tab-panel.active { grid-template-columns: 1fr; }
-    }
-
-    /* =========================================
-       TIMELINE ACCORDION
-       ========================================= */
-    .timeline {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      max-width: 820px;
-    }
-
-    details {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 16px 20px;
-    }
-
-    summary {
-      list-style: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      font-weight: 600;
-    }
-
-    summary::-webkit-details-marker {
-      display: none;
-    }
-
-    .t-year {
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: var(--accent);
-      background: var(--accent-light);
-      padding: 3px 10px;
-      border-radius: 99px;
-      min-width: 78px;
-      text-align: center;
-    }
-
-    details .t-body {
-      margin-top: 12px;
-      padding-top: 12px;
-      border-top: 1px solid var(--border);
-      font-size: 0.92rem;
-      color: var(--text-muted);
-    }
-
-    /* =========================================
-       CHECKLIST IMPEGNI INTERATTIVA
-       ========================================= */
-    .progress-wrap {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 24px;
-      max-width: 500px;
-    }
-
-    .progress-bar {
-      flex: 1;
-      height: 8px;
-      background: var(--border);
-      border-radius: 99px;
-      overflow: hidden;
-    }
-
-    .progress-fill {
-      height: 100%;
-      width: 0%;
-      background: var(--accent);
-      transition: width 0.3s ease;
-    }
-
-    .progress-text {
-      font-size: 0.875rem;
-      font-weight: 600;
-      color: var(--accent);
-    }
-
-    .checklist-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-      margin-bottom: 32px;
-    }
-
-    .check-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 20px;
-      display: flex;
-      gap: 16px;
-      cursor: pointer;
-      transition: border-color 0.2s, background 0.2s;
-      user-select: none;
-    }
-
-    .check-card:hover {
-      border-color: var(--accent);
-    }
-
-    .check-card.checked {
-      background: #F8FAFC;
-      border-color: var(--accent);
-    }
-
-    .checkbox-box {
-      width: 22px;
-      height: 22px;
-      border-radius: 6px;
-      border: 2px solid var(--border);
-      flex-shrink: 0;
-      margin-top: 2px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s;
-    }
-
-    .check-card.checked .checkbox-box {
-      background: var(--accent);
-      border-color: var(--accent);
-    }
-
-    .check-card.checked .checkbox-box::after {
-      content: "✓";
-      color: #FFF;
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .check-card h4 {
-      font-size: 1rem;
-      margin-bottom: 4px;
-    }
-
-    .check-card p {
-      font-size: 0.875rem;
-      color: var(--text-muted);
-    }
-
-    @media (max-width: 768px) {
-      .checklist-grid { grid-template-columns: 1fr; }
-    }
-
-    /* =========================================
-       FOOTER
-       ========================================= */
-    footer {
-      padding: 60px 0;
-      background: var(--bg-secondary);
-      font-size: 0.875rem;
-      color: var(--text-muted);
-    }
-
-    .footer-top {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 32px;
-      padding-bottom: 32px;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 24px;
-    }
-
-    .footer-links {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .footer-links a, footer a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    .footer-links a:hover {
-      text-decoration: underline;
-    }
-  </style>
-</head>
-<body id="top">
-
-  <!-- HEADER -->
-  <header>
-    <div class="container header-inner">
-      <a href="#top" class="brand">
-        <strong>Elena Rossi</strong>
-        <span>Candidatura CNAM · in rappresentanza delle Accademie</span>
-      </a>
-      <nav aria-label="Sezioni">
-        <a href="#chi-sono">Chi sono</a>
-        <a href="#comparto">Il Comparto</a>
-        <a href="#perche">Perché</a>
-        <a href="#pilastri">Programma</a>
-        <a href="#percorso">Percorso</a>
-        <a href="#impegni">Impegni</a>
-        <a href="#cnam">Il CNAM</a>
-      </nav>
-    </div>
-  </header>
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="container hero-grid">
-      <div>
-        <span class="eyebrow">Candidatura al CNAM · Elezioni 2026</span>
-        <h1>Mi candido per rappresentare al CNAM <em>le Accademie di Belle Arti</em></h1>
-        <p>Docente dal 2004, Direttrice per due mandati, coordinatrice di progetti nazionali di ricerca artistica: conosco le esigenze delle istituzioni piccole e grandi. Porto al Consiglio nazionale un'esperienza ventennale nella didattica e nella governance AFAM.</p>
-        <div class="btn-group">
-          <a href="#pilastri" class="btn btn-primary">Leggi i 5 pilastri del programma</a>
-          <a href="#comparto" class="btn btn-secondary">Perché posso rappresentare il comparto</a>
-        </div>
-      </div>
-
-      <div class="profile-card">
-        <h2>Elena Rossi</h2>
-        <div class="profile-role">Docente di I fascia · Progettazione Artistica per l'Impresa</div>
-        <div class="tag-list">
-          <div class="tag-item">Docente di ruolo AFAM · dal 2004</div>
-          <div class="tag-item">Direttrice Accademia Statale · 2018–2024</div>
-          <div class="tag-item">Membro Consiglio Accademico · 2012–2018</div>
-          <div class="tag-item">Referente Commissione Didattica e Qualità</div>
-          <div class="tag-item">Coordinatrice Dottorati di Ricerca AFAM</div>
-          <div class="tag-item">Esperta di valutazione sistemi formativi</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- NUMERI CHIAVE -->
-  <div class="stats-bar">
-    <div class="container stats-grid">
-      <div class="stat-box">
-        <div class="num" data-target="22">0</div>
-        <div class="label">anni di docenza continuativa nel sistema AFAM</div>
-      </div>
-      <div class="stat-box">
-        <div class="num" data-target="4">0</div>
-        <div class="label">istituzioni conosciute dall'interno tra docenza e valutazione</div>
-      </div>
-      <div class="stat-box">
-        <div class="num" data-target="6">0</div>
-        <div class="label">anni di direzione di un'istituzione statale</div>
-      </div>
-      <div class="stat-box">
-        <div class="num" data-target="12">0</div>
-        <div class="label">progetti di ricerca e internazionalizzazione coordinati</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- CHI SONO -->
-  <section id="chi-sono">
-    <div class="container bio-grid">
-      <div class="bio-text">
-        <span class="eyebrow">Chi sono</span>
-        <h2 class="section-title">Un percorso costruito dentro le aule, i laboratori e gli organi di governo</h2>
-        <p>Mi sono formata nell'alta formazione artistica e insegno dal 2004, oggi come docente di prima fascia. Nel corso degli anni ho ricoperto incarichi in tutti gli organi collegiali: Consiglio Accademico, Consiglio di Amministrazione, commissioni paritetiche e nuclei di autovalutazione.</p>
-        <p>Dal 2018 al 2024 ho guidato un'Accademia statale attraversando fasi complesse: la riforma degli ordinamenti, l'avvio dei nuovi bienni specialistici, la progettazione dei dottorati di ricerca e l'adeguamento edilizio e laboratoriale. Metto questa doppia competenza — didattica e gestionale — al servizio dell'intero comparto.</p>
-      </div>
-
-      <div class="skills-panel">
-        <h3>Competenze utili ai lavori del Consiglio</h3>
-        <p>Le materie su cui il CNAM esprime pareri, messe in relazione con la mia esperienza diretta.</p>
-        <div class="skill-item">
-          <strong>Regolamenti didattici</strong>
-          <span>Redatti e revisionati in commissione didattica e in direzione</span>
-        </div>
-        <div class="skill-item">
-          <strong>Reclutamento docenti</strong>
-          <span>Gestione bandi, concorsi nazionali e stabilizzazioni</span>
-        </div>
-        <div class="skill-item">
-          <strong>Programmazione offerta formativa</strong>
-          <span>Trienni, bienni e attivazione dei cicli dottorali</span>
-        </div>
-        <div class="skill-item">
-          <strong>Attuazione della legge 508/1999</strong>
-          <span>Autonomia statutaria e regolamenti applicativi</span>
-        </div>
-        <div class="skill-item">
-          <strong>Accreditamento e qualità</strong>
-          <span>Procedure di valutazione periodica e autovalutazione</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- IL COMPARTO -->
-  <section id="comparto">
-    <div class="container">
-      <span class="eyebrow">Il valore aggiunto</span>
-      <h2 class="section-title">Vent'anni di esperienza trasversale nelle istituzioni</h2>
-      <p class="lead">Le Accademie sono il cuore della produzione artistica e della sperimentazione visiva in Italia. Rappresentarle richiede la conoscenza reale delle differenze tra grandi poli storici e realtà territoriali.</p>
-
-      <div class="cards-3">
-        <div class="info-card">
-          <div class="card-head">Accademia di Bologna</div>
-          <div class="card-sub">2004 → 2015</div>
-          <p>Avvio dell'attività didattica, coordinamento dei laboratori multimediali e partecipazione attiva alle prime riforme degli ordinamenti didattici.</p>
-        </div>
-        <div class="info-card">
-          <div class="card-head">Accademia di Urbino</div>
-          <div class="card-sub">2015 → 2024</div>
-          <p>Docenza di prima fascia e due mandati di direzione: consolidamento dell'offerta formativa, apertura internazionale e progetti PNRR.</p>
-        </div>
-        <div class="info-card">
-          <div class="card-head">Nuclei di Valutazione</div>
-          <div class="card-sub">2021 → oggi</div>
-          <p>Collaborazione nei processi di assicurazione della qualità e monitoraggio della ricerca in diverse istituzioni del centro-nord.</p>
-        </div>
-      </div>
-
-      <div class="highlight-banner">
-        <div class="year-big">2018–2024<small>Coordinamento e Direzione</small></div>
-        <p>Sei anni alla guida di un'istituzione AFAM mi hanno insegnato a costruire sintesi tra esigenze diverse: docenti, studenti, personale tecnico-amministrativo e territorio. È lo stesso metodo che serve al CNAM: <strong>difendere le specificità della didattica laboratoriale senza isolarla dal sistema universitario</strong>.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- PERCHÉ -->
-  <section id="perche">
-    <div class="container">
-      <span class="eyebrow">Perché questa candidatura</span>
-      <h2 class="section-title">Dare voce alle esigenze concrete di chi lavora e studia nelle Accademie</h2>
-      <p class="lead" style="margin-bottom: 0;">Il CNAM esprime pareri decisivi su reclutamento, settori artistico-disciplinari e ordinamenti. Senza una rappresentanza che conosca dall'interno il funzionamento dei laboratori, le ore di docenza frontale e le criticità amministrative, le riforme rischiano di restare calate dall'alto. Mi candido per portare al tavolo ministeriale proposte concrete, condivise e verificabili.</p>
-    </div>
-  </section>
-
-  <!-- PROGRAMMA A TAB -->
-  <section id="pilastri">
-    <div class="container">
-      <span class="eyebrow">Il programma</span>
-      <h2 class="section-title">Cinque pilastri per il mandato</h2>
-      <p class="lead">Seleziona un pilastro per leggerne il dettaglio.</p>
-
-      <div class="tabs-nav" role="tablist">
-        <button class="tab-btn active" data-tab="tab1">1. Identità e Laboratori</button>
-        <button class="tab-btn" data-tab="tab2">2. Reclutamento e SAD</button>
-        <button class="tab-btn" data-tab="tab3">3. Status Docenti AFAM</button>
-        <button class="tab-btn" data-tab="tab4">4. Qualità e Semplificazione</button>
-        <button class="tab-btn" data-tab="tab5">5. Ricerca e Dottorati</button>
-      </div>
-
-      <!-- TAB 1 -->
-      <div class="tab-panel active" id="tab1">
-        <div>
-          <h3>Tutela della <span>didattica laboratoriale</span></h3>
-          <ul>
-            <li>Riconoscere il peso reale delle attività di laboratorio nella programmazione didattica e nei carichi orari dei docenti.</li>
-            <li>Garantire risorse adeguate per l'aggiornamento tecnologico delle attrezzature e la sicurezza degli spazi.</li>
-            <li>Promuovere reti territoriali tra Accademie, musei, fondazioni e sistema produttivo culturale.</li>
-          </ul>
-        </div>
-        <div class="quote-box">
-          <strong>"Il laboratorio è il luogo della ricerca"</strong>
-          Nelle istituzioni artistiche la teoria e la pratica non sono separabili: gli ordinamenti devono rispecchiare questa natura.
-        </div>
-      </div>
-
-      <!-- TAB 2 -->
-      <div class="tab-panel" id="tab2">
-        <div>
-          <h3><span>Reclutamento</span> e revisione dei SAD</h3>
-          <ul>
-            <li>Accelerare e rendere trasparenti le procedure di reclutamento per ridurre il precariato storico del comparto.</li>
-            <li>Aggiornare i Settori Artistico-Disciplinari (SAD) adeguandoli ai linguaggi contemporanei e alle nuove tecnologie.</li>
-            <li>Rafforzare gli organici del personale tecnico-amministrativo, indispensabile per il funzionamento delle sedi.</li>
-          </ul>
-        </div>
-        <div class="quote-box">
-          <strong>"Programmazione significa stabilità"</strong>
-          Non si può progettare un'offerta formativa triennale e magistrale senza certezza sugli organici docenti e tecnici.
-        </div>
-      </div>
-
-      <!-- TAB 3 -->
-      <div class="tab-panel" id="tab3">
-        <div>
-          <h3>Pari dignità e <span>status giuridico</span></h3>
-          <ul>
-            <li>Completare l'equiparazione normativa ed economica tra docenza AFAM e docenza universitaria.</li>
-            <li>Riconoscere formalmente il tempo dedicato alla produzione artistica e alla ricerca all'interno dell'impegno istituzionale.</li>
-            <li>Definire criteri chiari e condivisi per la valutazione della produzione artistica ai fini della carriera.</li>
-          </ul>
-        </div>
-        <div class="quote-box">
-          <strong>"Stessi titoli rilasciati, stessi diritti"</strong>
-          Chi forma laureati e dottori di ricerca deve godere di tutele, strumenti e riconoscimenti pari a quelli dell'università.
-        </div>
-      </div>
-
-      <!-- TAB 4 -->
-      <div class="tab-panel" id="tab4">
-        <div>
-          <h3><span>Valutazione</span> proporzionata e meno burocrazia</h3>
-          <ul>
-            <li>Promuovere requisiti di accreditamento calibrati sulle dimensioni effettive delle singole istituzioni.</li>
-            <li>Ridurre gli oneri documentali ripetitivi nei processi di assicurazione della qualità, puntando sulla sostanza didattica.</li>
-            <li>Favorire lo scambio di buone pratiche tra i Nuclei di Valutazione e le Commissioni Didattiche.</li>
-          </ul>
-        </div>
-        <div class="quote-box">
-          <strong>"La qualità non è un adempimento formale"</strong>
-          Le procedure devono aiutare le istituzioni a migliorarsi, non paralizzare i docenti in scadenze burocratiche.
-        </div>
-      </div>
-
-      <!-- TAB 5 -->
-      <div class="tab-panel" id="tab5">
-        <div>
-          <h3><span>Ricerca artistica</span>, dottorati e IA</h3>
-          <ul>
-            <li>Consolidare i dottorati di ricerca AFAM garantendo borse, fondi dedicati e continuità tra i cicli.</li>
-            <li>Sostenere la mobilità internazionale di studenti e docenti semplificando il riconoscimento dei crediti.</li>
-            <li>Aprire un tavolo nazionale sull'impatto dell'Intelligenza Artificiale nella formazione artistica e progettuale.</li>
-          </ul>
-        </div>
-        <div class="quote-box">
-          <strong>"Il dottorato AFAM è una svolta storica"</strong>
-          Ora occorre renderlo strutturale, finanziato e pienamente integrato nel sistema europeo della ricerca.
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PERCORSO (TIMELINE ESPANDIBILE) -->
-  <section id="percorso">
-    <div class="container">
-      <span class="eyebrow">Percorso istituzionale</span>
-      <h2 class="section-title">Dal 2004 a oggi, dentro il sistema AFAM</h2>
-      <p class="lead">Clicca su una voce per leggerne il dettaglio.</p>
-
-      <div class="timeline">
-        <details open>
-          <summary><span class="t-year">2004</span><span>Inizio della docenza di ruolo</span></summary>
-          <div class="t-body">Ingresso nei ruoli AFAM come docente di Progettazione e coordinamento dei primi laboratori digitali e multimediali.</div>
-        </details>
-        <details>
-          <summary><span class="t-year">2012–18</span><span>Consiglio Accademico e Commissione Didattica</span></summary>
-          <div class="t-body">Partecipazione attiva alla stesura dei regolamenti didattici di primo e secondo livello e al riordino dei piani di studio.</div>
-        </details>
-        <details>
-          <summary><span class="t-year">2018–24</span><span>Direzione di Accademia Statale (due mandati)</span></summary>
-          <div class="t-body">Sei anni di direzione caratterizzati dall'ampliamento dell'offerta formativa, dall'attivazione dei dottorati e dal potenziamento delle relazioni internazionali.</div>
-        </details>
-        <details>
-          <summary><span class="t-year">2024–oggi</span><span>Coordinamento Ricerca e Valutazione</span></summary>
-          <div class="t-body">Impegno nei collegi di dottorato AFAM e supporto ai processi di autovalutazione istituzionale.</div>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <!-- CHECKLIST IMPEGNI INTERATTIVA -->
-  <section id="impegni">
-    <div class="container">
-      <span class="eyebrow">Impegni concreti</span>
-      <h2 class="section-title">I miei impegni</h2>
-      <p class="lead">Una checklist di impegni verificabili: clicca sulle schede per spuntarle durante la lettura.</p>
-
-      <div class="progress-wrap">
-        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-        <div class="progress-text" id="progressText">0/6</div>
-      </div>
-
-      <div class="checklist-grid">
-        <div class="check-card" onclick="toggleCheck(this)">
-          <div class="checkbox-box"></div>
-          <div>
-            <h4>Consultazione permanente con le sedi</h4>
-            <p>Raccogliere osservazioni dalle istituzioni prima di ogni parere rilevante del Consiglio.</p>
-          </div>
-        </div>
-
-        <div class="check-card" onclick="toggleCheck(this)">
-          <div class="checkbox-box"></div>
-          <div>
-            <h4>Report periodico dei lavori</h4>
-            <p>Pubblicare un resoconto chiaro e accessibile sulle sedute e sulle proposte discusse al CNAM.</p>
-          </div>
-        </div>
-
-        <div class="check-card" onclick="toggleCheck(this)">
-          <div class="checkbox-box"></div>
-          <div>
-            <h4>Dossier sui Settori Artistico-Disciplinari</h4>
-            <p>Avviare una ricognizione aggiornata delle declaratorie per superare sovrapposizioni e vuoti normativi.</p>
-          </div>
-        </div>
-
-        <div class="check-card" onclick="toggleCheck(this)">
-          <div class="checkbox-box"></div>
-          <div>
-            <h4>Tutela delle istituzioni di piccole dimensioni</h4>
-            <p>Portare dati concreti sull'impatto dei requisiti di accreditamento nelle realtà con meno docenti.</p>
-          </div>
-        </div>
-
-        <div class="check-card" onclick="toggleCheck(this)">
-          <div class="checkbox-box"></div>
-          <div>
-            <h4>Monitoraggio dei dottorati AFAM</h4>
-            <p>Verificare la sostenibilità finanziaria e organizzativa dei percorsi dottorali attivati.</p>
-          </div>
-        </div>
-
-        <div class="check-card" onclick="toggleCheck(this)">
-          <div class="checkbox-box"></div>
-          <div>
-            <h4>Linee guida su IA e didattica artistica</h4>
-            <p>Promuovere un documento di indirizzo sull'uso etico e progettuale dell'intelligenza artificiale.</p>
-          </div>
-        </div>
-      </div>
-
-      <p style="color: var(--text-muted); font-size: 0.95rem;">
-        Per proposte, segnalazioni o domande sul programma: <a href="mailto:candidatura@esempio.it" style="color: var(--accent); font-weight: 500;">candidatura@esempio.it</a>
-      </p>
-    </div>
-  </section>
-
-  <!-- CHE COS'È IL CNAM -->
-  <section id="cnam" style="border-bottom: none;">
-    <div class="container">
-      <span class="eyebrow">Per chiarezza</span>
-      <h2 class="section-title">Che cos'è il CNAM</h2>
-      <p class="lead">Il Consiglio nazionale per l'alta formazione artistica e musicale è l'organo consultivo previsto dalla legge 508/1999 che concorre alla programmazione, all'indirizzo e al coordinamento del sistema AFAM.</p>
-
-      <div class="cards-3">
-        <div class="info-card">
-          <div class="card-head">27 componenti</div>
-          <div class="card-sub">Composizione</div>
-          <p>25 eletti in rappresentanza di docenti, personale tecnico-amministrativo e studenti AFAM, più 2 designati dal Ministro.</p>
-        </div>
-        <div class="info-card">
-          <div class="card-head">Mandato di 4 anni</div>
-          <div class="card-sub">Durata</div>
-          <p>Disciplinato dal D.M. 19 febbraio 2021 n. 67, garantisce la rappresentanza democratica delle componenti del sistema.</p>
-        </div>
-        <div class="info-card">
-          <div class="card-head">Pareri e proposte</div>
-          <div class="card-sub">Funzioni</div>
-          <p>Interviene su regolamenti didattici, reclutamento del personale docente, ordinamenti e programmazione dell'offerta formativa.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="container">
-      <div class="footer-top">
-        <div style="max-width: 520px;">
-          <strong style="color: var(--text-main); font-size: 1rem;">Elena Rossi</strong>
-          <p style="margin-top: 8px;">Programma di candidatura alla componente elettiva del Consiglio nazionale per l'alta formazione artistica e musicale (CNAM).</p>
-        </div>
-        <div class="footer-links">
-          <a href="#top">Torna all'inizio ↑</a>
-          <a href="https://cnam.mur.gov.it/" target="_blank" rel="noopener">Sito istituzionale CNAM</a>
-          <a href="https://www.mur.gov.it/" target="_blank" rel="noopener">Ministero dell'Università e della Ricerca</a>
-        </div>
-      </div>
-      <div>
-        Pagina informativa realizzata per la presentazione del programma elettorale. Tutti i testi e i riferimenti sono personalizzabili.
-      </div>
-    </div>
-  </footer>
-
-  <!-- JAVASCRIPT PER TAB, CONTATORI E CHECKLIST -->
-  <script>
-    // 1. Gestione Tab del Programma
-    const tabButtons = document.querySelectorAll('.tab-btn');
-    const tabPanels = document.querySelectorAll('.tab-panel');
-
-    tabButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        tabButtons.forEach(b => b.classList.remove('active'));
-        tabPanels.forEach(p => p.classList.remove('active'));
-
-        btn.classList.add('active');
-        document.getElementById(btn.dataset.tab).classList.add('active');
-      });
-    });
-
-    // 2. Animazione Contatori Numerici
-    const counters = document.querySelectorAll('.num');
-    const animateCounters = () => {
-      counters.forEach(counter => {
-        const target = +counter.getAttribute('data-target');
-        const step = Math.max(1, Math.ceil(target / 30));
-        let current = 0;
-
-        const update = () => {
-          current += step;
-          if (current < target) {
-            counter.innerText = current;
-            requestAnimationFrame(update);
-          } else {
-            counter.innerText = target;
-          }
-        };
-        update();
-      });
-    };
-
-    // Avvia i contatori quando la barra entra nella schermata
-    const observer = new IntersectionObserver((entries, obs) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          animateCounters();
-          obs.disconnect();
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candida Felici — Candidatura CNAM · XIX Collegio · Conservatori di Musica</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Newsreader (Editorial Serif), Plus Jakarta Sans & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Newsreader"', 'Georgia', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    colors: {
+                        paper: '#FAF9F6',
+                        surface: '#F4F1EA',
+                        ink: '#1A1918',
+                        muted: '#5C5954',
+                        borderwarm: '#E6E1D6',
+                        navy: '#1E2D3D',
+                        terracotta: '#8A3324',
+                    }
+                }
+            }
         }
-      });
-    }, { threshold: 0.3 });
+    </script>
 
-    const statsBar = document.querySelector('.stats-bar');
-    if (statsBar) observer.observe(statsBar);
+    <style>
+        :root {
+            --bg-paper: #FAF9F6;
+            --bg-surface: #F4F1EA;
+            --text-ink: #1A1918;
+            --text-muted: #5C5954;
+            --border-warm: #E6E1D6;
+            --accent-primary: #1E2D3D;
+            --accent-secondary: #8A3324;
+        }
 
-    // 3. Checklist Interattiva Impegni
-    function toggleCheck(card) {
-      card.classList.toggle('checked');
-      const total = document.querySelectorAll('.check-card').length;
-      const checked = document.querySelectorAll('.check-card.checked').length;
-      
-      document.getElementById('progressFill').style.width = `${(checked / total) * 100}%`;
-      document.getElementById('progressText').innerText = `${checked}/${total}`;
-    }
-  </script>
+        body {
+            background-color: var(--bg-paper);
+            color: var(--text-ink);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            line-height: 1.68;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, .font-editorial {
+            font-family: 'Newsreader', Georgia, serif;
+        }
+
+        .tab-panel {
+            animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        details > summary {
+            list-style: none;
+        }
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
+        details[open] .chevron-icon {
+            transform: rotate(180deg);
+        }
+
+        ::-webkit-scrollbar {
+            width: 7px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FAF9F6;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D5CFC2;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="selection:bg-terracotta selection:text-paper">
+
+    <!-- =======================================================================
+    1. STICKY TOP HEADER
+    ======================================================================= -->
+    <header class="sticky top-0 z-40 bg-paper/95 backdrop-blur-md border-b border-borderwarm">
+        <div class="max-w-6xl mx-auto px-5 sm:px-8 h-20 flex items-center justify-between gap-4">
+            <!-- Identità Candidata -->
+            <a href="#" class="flex items-center gap-3.5 group">
+                <div class="w-10 h-10 rounded-lg bg-terracotta text-paper flex items-center justify-center font-serif font-semibold text-lg tracking-tight shadow-2xs group-hover:bg-navy transition-colors">
+                    CF
+                </div>
+                <div>
+                    <div class="font-serif font-semibold text-xl leading-none text-ink tracking-tight">Candida Felici</div>
+                    <div class="text-[11px] sm:text-xs text-muted font-medium mt-1">Candidatura CNAM · XIX Collegio – Conservatori di Musica</div>
+                </div>
+            </a>
+
+            <!-- Navigazione Desktop -->
+            <nav aria-label="Navigazione principale" class="hidden lg:flex items-center gap-6 text-[13px] font-medium text-muted">
+                <a href="#chi-sono" class="hover:text-terracotta transition-colors py-1">Chi sono</a>
+                <a href="#competenze" class="hover:text-terracotta transition-colors py-1">Ambiti</a>
+                <a href="#programma" class="hover:text-terracotta transition-colors py-1">Programma</a>
+                <a href="#percorso" class="hover:text-terracotta transition-colors py-1">Percorso</a>
+                <a href="#cnam" class="hover:text-terracotta transition-colors py-1">Il CNAM</a>
+            </nav>
+
+            <!-- Bottone Menu Mobile -->
+            <button id="mobile-toggle" aria-label="Apri menu di navigazione" aria-expanded="false" class="lg:hidden p-2.5 rounded-lg border border-borderwarm text-ink hover:bg-surface transition-colors">
+                <i class="fa-solid fa-bars text-base"></i>
+            </button>
+        </div>
+
+        <!-- Menu Mobile Espandibile -->
+        <div id="mobile-nav" class="hidden lg:hidden bg-surface border-b border-borderwarm px-6 py-4 space-y-2.5">
+            <a href="#chi-sono" class="mobile-nav-link block py-1.5 text-sm font-medium text-ink hover:text-terracotta">Chi sono</a>
+            <a href="#competenze" class="mobile-nav-link block py-1.5 text-sm font-medium text-ink hover:text-terracotta">Ambiti</a>
+            <a href="#programma" class="mobile-nav-link block py-1.5 text-sm font-medium text-ink hover:text-terracotta">Programma</a>
+            <a href="#percorso" class="mobile-nav-link block py-1.5 text-sm font-medium text-ink hover:text-terracotta">Percorso</a>
+            <a href="#cnam" class="mobile-nav-link block py-1.5 text-sm font-medium text-ink hover:text-terracotta">Il CNAM</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- ===================================================================
+        2. HERO SECTION
+        =================================================================== -->
+        <section class="pt-14 pb-16 md:pt-24 md:pb-24 border-b border-borderwarm">
+            <div class="max-w-6xl mx-auto px-5 sm:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-start">
+
+                    <!-- Colonna Sinistra: Titolo & Intro -->
+                    <div class="lg:col-span-7">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-borderwarm font-mono text-[11px] sm:text-xs font-medium text-terracotta tracking-tight mb-7 shadow-2xs">
+                            <span class="w-2 h-2 rounded-full bg-terracotta"></span>
+                            <span>Candidatura al CNAM - XIX Collegio - Conservatori di Musica</span>
+                        </div>
+
+                        <h1 class="font-serif text-4xl sm:text-5xl md:text-[54px] leading-[1.09] tracking-tight text-ink font-normal mb-6">
+                            Mi candido per rappresentare al CNAM il <em class="italic font-normal text-terracotta">XIX Collegio</em> dei Conservatori di Musica.
+                        </h1>
+
+                        <p class="text-sm sm:text-base font-medium text-ink/85 mb-4 leading-relaxed">
+                            Area delle discipline musicologiche, pedagogiche, musicoterapiche, dell'organizzazione e della comunicazione dello spettacolo.
+                        </p>
+
+                        <p class="text-sm sm:text-base text-muted font-normal leading-relaxed mb-9 max-w-2xl">
+                            Porto in Consiglio l’esperienza di chi ha lavorato in numerosi Conservatori italiani (Milano, Parma, Como, Pavia, Trieste, Frosinone, Cosenza, Brescia) sperimentando in prima persona precariato, pendolarismo, riforme normative, esperienze didattiche e organizzative, coordinamento di un Corso di Dottorato, attività professionali come performer e nella ricerca, esperienze internazionali.
+                        </p>
+
+                        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5">
+                            <a href="#programma" class="inline-flex items-center justify-center gap-2.5 bg-terracotta hover:bg-[#72281B] text-paper px-6 py-3.5 rounded-xl text-sm font-semibold transition-all shadow-xs">
+                                <span>Leggi i 3 punti del programma</span>
+                                <i class="fa-solid fa-arrow-down text-xs"></i>
+                            </a>
+                            <a href="#chi-sono" class="inline-flex items-center justify-center gap-2.5 bg-white hover:bg-surface text-ink border border-borderwarm px-6 py-3.5 rounded-xl text-sm font-semibold transition-all">
+                                <span>Chi sono</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Colonna Destra: Profile Card -->
+                    <aside class="lg:col-span-5">
+                        <div class="bg-white rounded-2xl p-6 sm:p-8 border border-borderwarm shadow-xs">
+                            <div class="flex items-start justify-between gap-4 pb-5 mb-5 border-b border-borderwarm">
+                                <div>
+                                    <span class="font-mono text-[11px] uppercase tracking-wider text-terracotta font-medium">Profilo Candidata</span>
+                                    <h2 class="font-serif text-2xl sm:text-3xl text-ink mt-1">Candida Felici</h2>
+                                    <p class="text-xs sm:text-sm text-muted mt-1 leading-snug">
+                                        Docente di Storia della Musica · Conservatorio di Musica di Milano
+                                    </p>
+                                </div>
+                                <div class="w-11 h-11 rounded-xl bg-surface border border-borderwarm flex items-center justify-center shrink-0 text-terracotta">
+                                    <i class="fa-solid fa-landmark text-base"></i>
+                                </div>
+                            </div>
+
+                            <!-- Badge Pills Milestones -->
+                            <div class="space-y-3">
+                                <div class="text-xs font-semibold uppercase tracking-wider text-muted mb-2">Tappe e incarichi chiave</div>
+
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-terracotta/10 text-terracotta border border-terracotta/20 text-xs font-semibold">
+                                        <i class="fa-solid fa-award text-[11px]"></i>
+                                        Docente di ruolo DM 128 dal 2018
+                                    </span>
+
+                                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface text-ink border border-borderwarm text-xs font-medium">
+                                        <i class="fa-regular fa-calendar-check text-muted text-[11px]"></i>
+                                        Nel Sistema AFAM dal 2007
+                                    </span>
+
+                                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface text-ink border border-borderwarm text-xs font-medium">
+                                        <i class="fa-solid fa-building-columns text-muted text-[11px]"></i>
+                                        Conservatori di Trieste, Frosinone, Brescia, Cosenza, Pavia, Como, Parma, Milano
+                                    </span>
+
+                                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface text-ink border border-borderwarm text-xs font-medium">
+                                        <i class="fa-solid fa-music text-muted text-[11px]"></i>
+                                        Diploma di pianoforte e di clavicembalo
+                                    </span>
+
+                                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface text-ink border border-borderwarm text-xs font-medium">
+                                        <i class="fa-solid fa-graduation-cap text-muted text-[11px]"></i>
+                                        Dottorato in Musicologia, Friburgo (Svizzera)
+                                    </span>
+
+                                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface text-ink border border-borderwarm text-xs font-medium">
+                                        <i class="fa-solid fa-graduation-cap text-muted text-[11px]"></i>
+                                        Post-dottorato in Musicologia, Bologna
+                                    </span>
+
+                                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface text-ink border border-borderwarm text-xs font-medium">
+                                        <i class="fa-solid fa-flask text-muted text-[11px]"></i>
+                                        Coordinatrice Corso di Dottorato in Musica, arti performative e STEM (MUSART), Conservatori di Milano e Firenze
+                                    </span>
+
+                                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface text-ink border border-borderwarm text-xs font-medium">
+                                        <i class="fa-solid fa-landmark text-muted text-[11px]"></i>
+                                        Membro del Consiglio Accademico del Conservatorio di Milano
+                                    </span>
+
+                                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface text-ink border border-borderwarm text-xs font-medium">
+                                        <i class="fa-solid fa-microscope text-muted text-[11px]"></i>
+                                        Membro dell’IREMUS (Istituto per la ricerca musicale) del Conservatorio di Milano
+                                    </span>
+
+                                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface text-ink border border-borderwarm text-xs font-medium">
+                                        <i class="fa-solid fa-users text-muted text-[11px]"></i>
+                                        Membro del Direttivo della Società Italiana di Musicologia
+                                    </span>
+
+                                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface text-ink border border-borderwarm text-xs font-medium">
+                                        <i class="fa-solid fa-book-open text-muted text-[11px]"></i>
+                                        Vicedirettore rivista di studi musicologici «Nuove Musiche»
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="mt-6 pt-4 border-t border-borderwarm flex items-center justify-between text-xs text-muted">
+                                <span>Collegio elettorale: <strong class="text-ink">XIX Collegio</strong></span>
+                                <span class="font-mono px-2.5 py-0.5 rounded-md bg-surface border border-borderwarm text-ink">AFAM · Conservatori</span>
+                            </div>
+                        </div>
+                    </aside>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================================================
+        3. KEY METRICS STRIP
+        =================================================================== -->
+        <section id="metriche" aria-label="Numeri chiave del percorso" class="bg-navy text-paper py-12 sm:py-14 border-b border-borderwarm">
+            <div class="max-w-6xl mx-auto px-5 sm:px-8">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
+                    <div class="border-l-2 border-terracotta pl-4">
+                        <div class="font-serif text-4xl sm:text-5xl font-medium tracking-tight">
+                            <span class="counter" data-target="2007" data-plain="true">2007</span>
+                        </div>
+                        <div class="text-xs sm:text-sm text-stone-300 mt-1.5 font-normal leading-snug">
+                            Ingresso nel Sistema AFAM (docente di ruolo DM 128 dal 2018)
+                        </div>
+                    </div>
+
+                    <div class="border-l-2 border-terracotta pl-4">
+                        <div class="font-serif text-4xl sm:text-5xl font-medium tracking-tight">
+                            <span class="counter" data-target="8">0</span>
+                        </div>
+                        <div class="text-xs sm:text-sm text-stone-300 mt-1.5 font-normal leading-snug">
+                            Conservatori italiani in cui ha lavorato (Milano, Parma, Como, Pavia, Trieste, Frosinone, Cosenza, Brescia)
+                        </div>
+                    </div>
+
+                    <div class="border-l-2 border-terracotta pl-4">
+                        <div class="font-serif text-4xl sm:text-5xl font-medium tracking-tight">
+                            <span class="counter" data-target="3">0</span>
+                        </div>
+                        <div class="text-xs sm:text-sm text-stone-300 mt-1.5 font-normal leading-snug">
+                            Convegni internazionali co-ideati tra Parma e Milano (2021, 2023, 2025) e partecipazione al PRIN 2022
+                        </div>
+                    </div>
+
+                    <div class="border-l-2 border-terracotta pl-4">
+                        <div class="font-serif text-4xl sm:text-5xl font-medium tracking-tight">
+                            <span class="counter" data-target="2025" data-plain="true">2025</span>
+                        </div>
+                        <div class="text-xs sm:text-sm text-stone-300 mt-1.5 font-normal leading-snug">
+                            Consiglio Accademico (Milano) e Coordinamento Dottorato MUSART (Milano e Firenze)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================================================
+        4. SEZIONE "CHI SONO"
+        =================================================================== -->
+        <section id="chi-sono" class="py-20 md:py-28 border-b border-borderwarm">
+            <div class="max-w-6xl mx-auto px-5 sm:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-start">
+
+                    <!-- Colonna Sinistra: Biografia integrale fedele al documento -->
+                    <div class="lg:col-span-7">
+                        <span class="font-mono text-xs uppercase tracking-widest text-terracotta font-medium">Profilo e Storia</span>
+                        <h2 class="font-serif text-3xl sm:text-4xl text-ink mt-2 mb-6 leading-tight">
+                            Chi sono
+                        </h2>
+
+                        <div class="space-y-4 text-sm sm:text-base text-muted leading-relaxed">
+                            <p>
+                                Sono docente di ruolo di <strong class="text-ink font-semibold">Storia della musica</strong> presso il <strong class="text-ink font-semibold">Conservatorio di Milano</strong>.
+                            </p>
+                            <p>
+                                La mia attività di interprete al pianoforte e al clavicembalo si è sempre intrecciata con gli interessi di ricerca, dal barocco alla creatività contemporanea. Dopo la Laurea in lettere con indirizzo musicale presso l’Università La Sapienza di Roma, ho completato gli studi di Dottorato all’Università di Friburgo (Svizzera). Nel 2005 ho vinto una borsa biennale di ricerca post-dottorale presso l’Università di Bologna. Ho conseguito l’abilitazione come <em>maître de conférences</em> in Francia (2012) e l’abilitazione scientifica nazionale italiana come professore di seconda fascia (2018). Sono membro dei comitati scientifici delle riviste <strong class="text-ink font-semibold">«Chigiana»</strong>, <strong class="text-ink font-semibold">«Rivista Italiana di Musicologia»</strong> e vice-direttrice della rivista <strong class="text-ink font-semibold">«Nuove Musiche»</strong>.
+                            </p>
+                            <p>
+                                Nei conservatori in cui ho insegnato ho sempre portato il mio entusiasmo per la ricerca, collaborando all’ideazione di Convegni internazionali quali <strong class="text-ink font-semibold">Musica e Spazio: esperienze passate e prospettive future</strong> (Parma 2021), <strong class="text-ink font-semibold">Ligeti 1923-2023: composizione come invenzione, fra memoria e sperimentazione</strong> (Milano 2023), <strong class="text-ink font-semibold">Berio: labirinti in musica</strong> (Milano 2025). Queste iniziative hanno sempre previsto una stretta integrazione fra ricerca e performance sia nell’esplorazione della prassi esecutiva e della collaborazione fra interprete e compositore, sia alternando sessioni di ricerca con momenti di performance.
+                            </p>
+                            <p>
+                                Ho partecipato al PRIN <strong class="text-ink font-semibold">Improvvisazione/Composizione: la doppia identità della musica europea</strong> (2022).
+                            </p>
+                            <p>
+                                Faccio parte della segreteria del <strong class="text-ink font-semibold">Coordinamento Nazionale Docenti di Discipline Musicologiche nell’AFAM (DDMA)</strong> e sono membro del board della <strong class="text-ink font-semibold">Società Italiana di Musicologia</strong>, dove sono responsabile degli Insegnamenti Musicologici. Mi sono sempre impegnata all’interno delle istituzioni, entrando a far parte nel 2025 del <strong class="text-ink font-semibold">Consiglio Accademico</strong> del Conservatorio di Milano e assumendo il ruolo di Coordinatrice del Corso di Dottorato in <strong class="text-ink font-semibold">Musica, arti performative e STEM (MUSART)</strong> in forma associata fra i Conservatori di Milano e Firenze, che è caratterizzato da un forte orientamento verso l’interdisciplinarietà, l’integrazione di arte e scienza e le collaborazioni internazionali.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Colonna Destra: Ambiti e competenze per il Consiglio -->
+                    <div id="competenze" class="lg:col-span-5">
+                        <div class="bg-white rounded-2xl p-6 sm:p-8 border border-borderwarm shadow-xs">
+                            <span class="font-mono text-[11px] uppercase tracking-wider text-terracotta font-medium">Aree di intervento</span>
+                            <h3 class="font-serif text-2xl text-ink mt-1 mb-6">Ambiti e competenze per il Consiglio</h3>
+
+                            <div class="space-y-4">
+                                <!-- Area 1 -->
+                                <div class="bg-paper p-4 sm:p-5 rounded-xl border border-borderwarm">
+                                    <div class="flex items-center gap-3 mb-2">
+                                        <div class="w-8 h-8 rounded-lg bg-terracotta/10 text-terracotta flex items-center justify-center shrink-0">
+                                            <i class="fa-solid fa-music text-xs"></i>
+                                        </div>
+                                        <h4 class="font-semibold text-sm text-ink">Integrazione di performance e ricerca</h4>
+                                    </div>
+                                    <p class="text-xs text-muted leading-relaxed">
+                                        Attività di interprete al pianoforte e al clavicembalo intrecciata con la ricerca musicologica, convegni internazionali e prassi esecutiva.
+                                    </p>
+                                </div>
+
+                                <!-- Area 2 -->
+                                <div class="bg-paper p-4 sm:p-5 rounded-xl border border-borderwarm">
+                                    <div class="flex items-center gap-3 mb-2">
+                                        <div class="w-8 h-8 rounded-lg bg-terracotta/10 text-terracotta flex items-center justify-center shrink-0">
+                                            <i class="fa-solid fa-building-columns text-xs"></i>
+                                        </div>
+                                        <h4 class="font-semibold text-sm text-ink">Vasta esperienza istituzionale e organizzativa</h4>
+                                    </div>
+                                    <p class="text-xs text-muted leading-relaxed">
+                                        Consiglio Accademico e IREMUS (Conservatorio di Milano), Direttivo Società Italiana di Musicologia, segreteria DDMA e coordinamento Dottorato MUSART.
+                                    </p>
+                                </div>
+
+                                <!-- Area 3 -->
+                                <div class="bg-paper p-4 sm:p-5 rounded-xl border border-borderwarm">
+                                    <div class="flex items-center gap-3 mb-2">
+                                        <div class="w-8 h-8 rounded-lg bg-terracotta/10 text-terracotta flex items-center justify-center shrink-0">
+                                            <i class="fa-solid fa-scale-balanced text-xs"></i>
+                                        </div>
+                                        <h4 class="font-semibold text-sm text-ink">Competenza normativa</h4>
+                                    </div>
+                                    <p class="text-xs text-muted leading-relaxed">
+                                        Esperienza diretta attraverso riforme normative, percorsi di reclutamento, governance e ordinamenti del terzo ciclo nei Conservatori italiani.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================================================
+        5. SEZIONE "IL PROGRAMMA" — INTERACTIVE TABBED INTERFACE (3 PUNTI)
+        =================================================================== -->
+        <section id="programma" class="py-20 md:py-28 border-b border-borderwarm bg-surface/40">
+            <div class="max-w-6xl mx-auto px-5 sm:px-8">
+                <div class="max-w-3xl mb-10">
+                    <span class="font-mono text-xs uppercase tracking-widest text-terracotta font-medium">Proposte operative</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl text-ink mt-2 mb-3">
+                        Il Programma
+                    </h2>
+                    <p class="text-sm sm:text-base text-muted">
+                        Tre linee programmatiche per tutelare il lavoro nei Conservatori, consolidare l’autonomia istituzionale e valorizzare la didattica e la ricerca nel XIX Collegio.
+                    </p>
+                </div>
+
+                <!-- Tab Controls (Accessibili da tastiera) -->
+                <div role="tablist" aria-label="Punti del programma CNAM" class="flex flex-wrap gap-2.5 mb-8">
+                    <button role="tab" aria-selected="true" aria-controls="panel-1" id="tab-1" data-tab="1" class="tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-terracotta text-paper shadow-xs">
+                        1. Organici, reclutamento e diritti
+                    </button>
+                    <button role="tab" aria-selected="false" aria-controls="panel-2" id="tab-2" data-tab="2" class="tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-white text-muted hover:text-ink border border-borderwarm">
+                        2. Normativa e riconoscimento giuridico-economico
+                    </button>
+                    <button role="tab" aria-selected="false" aria-controls="panel-3" id="tab-3" data-tab="3" class="tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-white text-muted hover:text-ink border border-borderwarm">
+                        3. Valorizzazione della ricerca
+                    </button>
+                </div>
+
+                <!-- Tab Panels Container -->
+                <div class="bg-white rounded-2xl p-6 sm:p-10 border border-borderwarm shadow-xs">
+
+                    <!-- Panel 1: Organici, reclutamento e diritti -->
+                    <div id="panel-1" role="tabpanel" aria-labelledby="tab-1" class="tab-panel grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                        <div class="lg:col-span-7">
+                            <div class="font-mono text-xs uppercase tracking-widest text-terracotta mb-2">Punto 01</div>
+                            <h3 class="font-serif text-2xl sm:text-3xl text-ink mb-4">Organici, reclutamento e diritti</h3>
+                            <p class="text-sm sm:text-base text-muted leading-relaxed mb-6">
+                                Il futuro delle istituzioni AFAM dipende da un organico numericamente adeguato e assunto sulla base dei due pilastri della <strong class="text-ink font-semibold">competenza</strong> e dell’<strong class="text-ink font-semibold">esperienza professionale</strong>.
+                            </p>
+                            <ul class="space-y-3.5 text-sm text-ink/90">
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-check text-terracotta mt-1"></i>
+                                    <span>Mi impegno dunque a contrastare la riduzione delle facoltà assunzionali e a sostenere procedure concorsuali eque e trasparenti.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-check text-terracotta mt-1"></i>
+                                    <span>Mi impegno a tutelare i diritti del personale AFAM contro la precarietà e le disparità di trattamento.</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="lg:col-span-5">
+                            <div class="bg-surface p-6 sm:p-7 rounded-2xl border border-borderwarm">
+                                <i class="fa-solid fa-quote-left text-terracotta text-xl mb-3 block"></i>
+                                <p class="font-serif italic text-xl text-ink leading-snug mb-4">
+                                    “Il futuro delle istituzioni AFAM dipende da un organico numericamente adeguato e assunto sulla base dei due pilastri della competenza e dell’esperienza professionale.”
+                                </p>
+                                <div class="font-mono text-[11px] font-medium text-muted uppercase tracking-wider">Punto 01 · Organici e Diritti</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Panel 2: Normativa e riconoscimento giuridico-economico -->
+                    <div id="panel-2" role="tabpanel" aria-labelledby="tab-2" class="tab-panel hidden grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                        <div class="lg:col-span-7">
+                            <div class="font-mono text-xs uppercase tracking-widest text-terracotta mb-2">Punto 02</div>
+                            <h3 class="font-serif text-2xl sm:text-3xl text-ink mb-4">Normativa e riconoscimento giuridico-economico</h3>
+                            <p class="text-sm sm:text-base text-muted leading-relaxed mb-6">
+                                I regolamenti sulla governance e la valutazione devono contribuire a valorizzare le istituzioni AFAM e a rendere sempre più trasparente e democratica la gestione delle nostre istituzioni. Inoltre, con l’attivazione del <strong class="text-ink font-semibold">terzo ciclo</strong> non è più concepibile mantenere la disparità di trattamento economico fra Università e AFAM.
+                            </p>
+                            <ul class="space-y-3.5 text-sm text-ink/90">
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-check text-terracotta mt-1"></i>
+                                    <span>Mi impegno dunque a sostenere la parità del ruolo giuridico e del trattamento economico fra Università e AFAM.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-check text-terracotta mt-1"></i>
+                                    <span>Mi impegno per favorire una completa armonizzazione fra università e AFAM, che sia condotta nel rispetto del valore della pratica artistica come componente essenziale della formazione superiore musicale.</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="lg:col-span-5">
+                            <div class="bg-surface p-6 sm:p-7 rounded-2xl border border-borderwarm">
+                                <i class="fa-solid fa-quote-left text-terracotta text-xl mb-3 block"></i>
+                                <p class="font-serif italic text-xl text-ink leading-snug mb-4">
+                                    “Con l’attivazione del terzo ciclo non è più concepibile mantenere la disparità di trattamento economico fra Università e AFAM.”
+                                </p>
+                                <div class="font-mono text-[11px] font-medium text-muted uppercase tracking-wider">Punto 02 · Normativa e Parità</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Panel 3: Valorizzazione della ricerca -->
+                    <div id="panel-3" role="tabpanel" aria-labelledby="tab-3" class="tab-panel hidden grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                        <div class="lg:col-span-7">
+                            <div class="font-mono text-xs uppercase tracking-widest text-terracotta mb-2">Punto 03</div>
+                            <h3 class="font-serif text-2xl sm:text-3xl text-ink mb-4">Valorizzazione della ricerca</h3>
+                            <p class="text-sm sm:text-base text-muted leading-relaxed mb-6">
+                                La ricerca è una componente fondamentale per lo sviluppo delle istituzioni AFAM. È necessario riconoscerne la centralità, valorizzare le diverse forme di produzione artistica e scientifica favorendone l’integrazione, e creare le condizioni organizzative, normative ed economiche perché ciò avvenga.
+                            </p>
+                            <ul class="space-y-3.5 text-sm text-ink/90">
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-check text-terracotta mt-1"></i>
+                                    <span>Mi impegno dunque a sostenere il consolidamento dei dottorati di ricerca.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-check text-terracotta mt-1"></i>
+                                    <span>Mi impegno a promuovere il riconoscimento della ricerca come parte integrante delle funzioni istituzionali dell’AFAM e del lavoro dei docenti.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-check text-terracotta mt-1"></i>
+                                    <span>Mi impegno a sostenere la collaborazione paritaria fra istituzioni della formazione superiore, Conservatori, Accademie, Università e Centri di ricerca.</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="lg:col-span-5">
+                            <div class="bg-surface p-6 sm:p-7 rounded-2xl border border-borderwarm">
+                                <i class="fa-solid fa-quote-left text-terracotta text-xl mb-3 block"></i>
+                                <p class="font-serif italic text-xl text-ink leading-snug mb-4">
+                                    “È necessario riconoscerne la centralità, valorizzare le diverse forme di produzione artistica e scientifica favorendone l’integrazione.”
+                                </p>
+                                <div class="font-mono text-[11px] font-medium text-muted uppercase tracking-wider">Punto 03 · Ricerca e Dottorati</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================================================
+        6. SEZIONE "PERCORSO E PROGETTI" — INTERACTIVE ACCORDION TIMELINE
+        =================================================================== -->
+        <section id="percorso" class="py-20 md:py-28 border-b border-borderwarm">
+            <div class="max-w-4xl mx-auto px-5 sm:px-8">
+                <div class="mb-12">
+                    <span class="font-mono text-xs uppercase tracking-widest text-terracotta font-medium">Biografia professionale e accademica</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl text-ink mt-2 mb-3">
+                        Percorso e progetti
+                    </h2>
+                    <p class="text-sm sm:text-base text-muted">
+                        Le tappe della formazione musicale e musicologica, dell’insegnamento nei Conservatori italiani e degli incarichi istituzionali e scientifici.
+                    </p>
+                </div>
+
+                <!-- Vertical Timeline -->
+                <div class="relative pl-6 sm:pl-8 border-l-2 border-borderwarm space-y-5">
+
+                    <!-- Item 1: 2025 · Consiglio Accademico e Dottorato MUSART -->
+                    <details open class="group bg-white rounded-2xl border border-borderwarm p-5 sm:p-6 shadow-2xs relative">
+                        <span class="absolute -left-[33px] sm:-left-[41px] top-6 w-4 h-4 rounded-full bg-terracotta border-4 border-paper"></span>
+                        <summary class="flex items-center justify-between gap-4 cursor-pointer">
+                            <div class="flex flex-wrap items-center gap-3">
+                                <span class="font-mono px-3 py-1 rounded-lg bg-terracotta text-paper text-xs font-medium">2025 — Oggi</span>
+                                <h3 class="font-serif text-xl sm:text-2xl text-ink">Consiglio Accademico e Dottorato MUSART</h3>
+                            </div>
+                            <i class="fa-solid fa-chevron-down chevron-icon text-xs text-muted transition-transform duration-200 shrink-0"></i>
+                        </summary>
+                        <div class="mt-4 pt-4 border-t border-borderwarm text-sm text-muted leading-relaxed">
+                            Nel 2025 entra a far parte del <strong class="text-ink">Consiglio Accademico</strong> del Conservatorio di Milano e assume il ruolo di Coordinatrice del Corso di Dottorato in <strong class="text-ink">Musica, arti performative e STEM (MUSART)</strong> in forma associata fra i Conservatori di Milano e Firenze, orientato verso l’interdisciplinarietà, l’integrazione di arte e scienza e le collaborazioni internazionali. È inoltre membro dell’<strong class="text-ink">IREMUS</strong> (Istituto per la ricerca musicale) del Conservatorio di Milano.
+                        </div>
+                    </details>
+
+                    <!-- Item 2: 2021–2025 · Convegni Internazionali e PRIN -->
+                    <details open class="group bg-white rounded-2xl border border-borderwarm p-5 sm:p-6 shadow-2xs relative">
+                        <span class="absolute -left-[33px] sm:-left-[41px] top-6 w-4 h-4 rounded-full bg-navy border-4 border-paper"></span>
+                        <summary class="flex items-center justify-between gap-4 cursor-pointer">
+                            <div class="flex flex-wrap items-center gap-3">
+                                <span class="font-mono px-3 py-1 rounded-lg bg-surface border border-borderwarm text-ink text-xs font-medium">2021 — 2025</span>
+                                <h3 class="font-serif text-xl sm:text-2xl text-ink">Convegni Internazionali, PRIN e Società Scientifiche</h3>
+                            </div>
+                            <i class="fa-solid fa-chevron-down chevron-icon text-xs text-muted transition-transform duration-200 shrink-0"></i>
+                        </summary>
+                        <div class="mt-4 pt-4 border-t border-borderwarm text-sm text-muted leading-relaxed space-y-2.5">
+                            <p>Ideazione di convegni internazionali con stretta integrazione fra ricerca e performance e incarichi scientifici:</p>
+                            <ul class="space-y-1.5 pl-4 border-l-2 border-borderwarm">
+                                <li><strong class="text-ink">Musica e Spazio: esperienze passate e prospettive future</strong> (Parma 2021).</li>
+                                <li><strong class="text-ink">PRIN Improvvisazione/Composizione: la doppia identità della musica europea</strong> (2022).</li>
+                                <li><strong class="text-ink">Ligeti 1923-2023: composizione come invenzione, fra memoria e sperimentazione</strong> (Milano 2023).</li>
+                                <li><strong class="text-ink">Berio: labirinti in musica</strong> (Milano 2025).</li>
+                                <li>Segreteria del <strong class="text-ink">DDMA</strong>, board della <strong class="text-ink">Società Italiana di Musicologia</strong> (responsabile Insegnamenti Musicologici), vice-direttrice di <strong class="text-ink">«Nuove Musiche»</strong> e comitati scientifici di <strong class="text-ink">«Chigiana»</strong> e <strong class="text-ink">«Rivista Italiana di Musicologia»</strong>.</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <!-- Item 3: 2018 · Docente di ruolo DM 128 -->
+                    <details class="group bg-white rounded-2xl border border-borderwarm p-5 sm:p-6 shadow-2xs relative">
+                        <span class="absolute -left-[33px] sm:-left-[41px] top-6 w-4 h-4 rounded-full bg-navy border-4 border-paper"></span>
+                        <summary class="flex items-center justify-between gap-4 cursor-pointer">
+                            <div class="flex flex-wrap items-center gap-3">
+                                <span class="font-mono px-3 py-1 rounded-lg bg-surface border border-borderwarm text-ink text-xs font-medium">2018</span>
+                                <h3 class="font-serif text-xl sm:text-2xl text-ink">Docente di ruolo DM 128 e Abilitazione II fascia</h3>
+                            </div>
+                            <i class="fa-solid fa-chevron-down chevron-icon text-xs text-muted transition-transform duration-200 shrink-0"></i>
+                        </summary>
+                        <div class="mt-4 pt-4 border-t border-borderwarm text-sm text-muted leading-relaxed">
+                            Immissione in ruolo <strong class="text-ink">DM 128</strong> dal 2018 (oggi docente di ruolo di Storia della musica presso il Conservatorio di Milano) e conseguimento dell’<strong class="text-ink">abilitazione scientifica nazionale italiana</strong> come professore di seconda fascia (2018), dopo l’abilitazione come <em>maître de conférences</em> in Francia (2012).
+                        </div>
+                    </details>
+
+                    <!-- Item 4: 2007 · Nel Sistema AFAM -->
+                    <details class="group bg-white rounded-2xl border border-borderwarm p-5 sm:p-6 shadow-2xs relative">
+                        <span class="absolute -left-[33px] sm:-left-[41px] top-6 w-4 h-4 rounded-full bg-navy border-4 border-paper"></span>
+                        <summary class="flex items-center justify-between gap-4 cursor-pointer">
+                            <div class="flex flex-wrap items-center gap-3">
+                                <span class="font-mono px-3 py-1 rounded-lg bg-surface border border-borderwarm text-ink text-xs font-medium">Dal 2007</span>
+                                <h3 class="font-serif text-xl sm:text-2xl text-ink">Esperienza nei Conservatori italiani</h3>
+                            </div>
+                            <i class="fa-solid fa-chevron-down chevron-icon text-xs text-muted transition-transform duration-200 shrink-0"></i>
+                        </summary>
+                        <div class="mt-4 pt-4 border-t border-borderwarm text-sm text-muted leading-relaxed">
+                            Nel Sistema AFAM dal 2007, ha lavorato nei Conservatori di <strong class="text-ink">Trieste, Frosinone, Brescia, Cosenza, Pavia, Como, Parma e Milano</strong>, sperimentando in prima persona precariato, pendolarismo, riforme normative, esperienze didattiche e organizzative.
+                        </div>
+                    </details>
+
+                    <!-- Item 5: Formazione musicale e accademica -->
+                    <details class="group bg-white rounded-2xl border border-borderwarm p-5 sm:p-6 shadow-2xs relative">
+                        <span class="absolute -left-[33px] sm:-left-[41px] top-6 w-4 h-4 rounded-full bg-navy border-4 border-paper"></span>
+                        <summary class="flex items-center justify-between gap-4 cursor-pointer">
+                            <div class="flex flex-wrap items-center gap-3">
+                                <span class="font-mono px-3 py-1 rounded-lg bg-surface border border-borderwarm text-ink text-xs font-medium">Formazione</span>
+                                <h3 class="font-serif text-xl sm:text-2xl text-ink">Diplomi, Laurea, Dottorato e Post-dottorato</h3>
+                            </div>
+                            <i class="fa-solid fa-chevron-down chevron-icon text-xs text-muted transition-transform duration-200 shrink-0"></i>
+                        </summary>
+                        <div class="mt-4 pt-4 border-t border-borderwarm text-sm text-muted leading-relaxed">
+                            <strong class="text-ink">Diploma di pianoforte e di clavicembalo</strong>; <strong class="text-ink">Laurea in lettere</strong> con indirizzo musicale presso l’Università La Sapienza di Roma; <strong class="text-ink">Dottorato in Musicologia</strong> all’Università di Friburgo (Svizzera); borsa biennale di ricerca <strong class="text-ink">post-dottorale in Musicologia</strong> presso l’Università di Bologna (2005).
+                        </div>
+                    </details>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================================================
+        7. SEZIONE "CHE COS'È IL CNAM" & "IL XIX COLLEGIO"
+        =================================================================== -->
+        <section id="cnam" class="py-20 md:py-28 bg-surface/60">
+            <div class="max-w-6xl mx-auto px-5 sm:px-8">
+                <div class="max-w-3xl mb-12">
+                    <span class="font-mono text-xs uppercase tracking-widest text-terracotta font-medium">Quadro Istituzionale</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl text-ink mt-2 mb-3">
+                        Che cos’è il CNAM e il XIX Collegio
+                    </h2>
+                    <p class="text-sm sm:text-base text-muted leading-relaxed">
+                        Il Consiglio Nazionale per l’Alta Formazione Artistica e Musicale (CNAM) è l’organo consultivo e propositivo del Ministero dell’Università e della Ricerca (MUR) per l’intero sistema AFAM, istituito ai sensi dell’art. 3 della Legge 21 dicembre 1999, n. 508.
+                    </p>
+                </div>
+
+                <!-- 3-Column Institutional Info Block -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <!-- Card 1 -->
+                    <div class="bg-white p-7 rounded-2xl border border-borderwarm shadow-2xs">
+                        <div class="w-11 h-11 rounded-xl bg-navy text-paper flex items-center justify-center font-serif text-xl font-semibold mb-5">
+                            27
+                        </div>
+                        <h3 class="font-serif text-2xl text-ink mb-2.5">27 componenti</h3>
+                        <p class="text-sm text-muted leading-relaxed">
+                            Composto da rappresentanti elettivi dei docenti dei diversi comparti AFAM (Conservatori, Accademie, ISIA), oltre ai rappresentanti degli studenti, del personale tecnico-amministrativo e ai componenti designati.
+                        </p>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="bg-white p-7 rounded-2xl border border-borderwarm shadow-2xs">
+                        <div class="w-11 h-11 rounded-xl bg-navy text-paper flex items-center justify-center font-serif text-xl font-semibold mb-5">
+                            4
+                        </div>
+                        <h3 class="font-serif text-2xl text-ink mb-2.5">Mandato di 4 anni</h3>
+                        <p class="text-sm text-muted leading-relaxed">
+                            I componenti del Consiglio restano in carica per un quadriennio, operando in seduta plenaria e nelle commissioni istruttorie per formulare pareri obbligatori e proposte sugli atti normativi e regolamentari del sistema AFAM.
+                        </p>
+                    </div>
+
+                    <!-- Card 3: Il XIX Collegio -->
+                    <div class="bg-white p-7 rounded-2xl border border-terracotta/30 shadow-2xs">
+                        <div class="w-11 h-11 rounded-xl bg-terracotta text-paper flex items-center justify-center font-serif text-lg font-semibold mb-5">
+                            XIX
+                        </div>
+                        <h3 class="font-serif text-2xl text-ink mb-2.5">Il XIX Collegio · Conservatori</h3>
+                        <p class="text-sm text-muted leading-relaxed">
+                            Rappresentanza specifica del <strong class="text-ink">XIX Collegio</strong>: <em>Area delle discipline musicologiche, pedagogiche, musicoterapiche, dell'organizzazione e della comunicazione dello spettacolo</em>.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Box Ufficiale Riferimenti MUR & CNAM -->
+                <div class="bg-white p-5 sm:p-6 rounded-2xl border border-borderwarm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs sm:text-sm">
+                    <div class="text-muted">
+                        <strong class="text-ink">Approfondimenti istituzionali:</strong> Consulta la documentazione ufficiale sul Consiglio Nazionale e sulla normativa AFAM.
+                    </div>
+                    <div class="flex flex-wrap items-center gap-3 shrink-0">
+                        <a href="https://www.mur.gov.it/it/aree-tematiche/afam" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-terracotta font-semibold hover:underline">
+                            <span>Portale AFAM · MUR</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-[11px]"></i>
+                        </a>
+                        <span class="text-borderwarm">|</span>
+                        <a href="https://www.mur.gov.it/it/ministero/strutture-e-organi-collegiali/cnam" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-terracotta font-semibold hover:underline">
+                            <span>Pagina Ufficiale CNAM</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-[11px]"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- =======================================================================
+    8. CLEAN INSTITUTIONAL FOOTER
+    ======================================================================= -->
+    <footer class="bg-ink text-stone-300 py-14 border-t border-stone-800">
+        <div class="max-w-6xl mx-auto px-5 sm:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-10 pb-10 border-b border-stone-800">
+                <!-- Colonna 1: Identità -->
+                <div class="md:col-span-5">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span class="w-8 h-8 rounded-md bg-terracotta text-paper flex items-center justify-center font-serif font-semibold text-sm">CF</span>
+                        <span class="font-serif text-2xl text-paper">Candida Felici</span>
+                    </div>
+                    <p class="text-xs sm:text-sm text-stone-400 leading-relaxed max-w-md">
+                        Candidatura al Consiglio Nazionale per l’Alta Formazione Artistica e Musicale (CNAM) in rappresentanza del <strong class="text-stone-200 font-medium">XIX Collegio</strong>: Area delle discipline musicologiche, pedagogiche, musicoterapiche, dell'organizzazione e della comunicazione dello spettacolo – Conservatori di Musica.
+                    </p>
+                    <div class="mt-4 text-xs text-stone-400">
+                        Docente di Storia della Musica · Conservatorio di Musica di Milano
+                    </div>
+                </div>
+
+                <!-- Colonna 2: Navigazione rapida -->
+                <div class="md:col-span-3">
+                    <div class="font-mono text-xs uppercase tracking-widest text-stone-400 mb-3">Sezioni</div>
+                    <ul class="space-y-2 text-xs sm:text-sm">
+                        <li><a href="#chi-sono" class="hover:text-paper transition-colors">Chi sono</a></li>
+                        <li><a href="#competenze" class="hover:text-paper transition-colors">Ambiti e competenze</a></li>
+                        <li><a href="#programma" class="hover:text-paper transition-colors">Il Programma</a></li>
+                        <li><a href="#percorso" class="hover:text-paper transition-colors">Percorso e progetti</a></li>
+                        <li><a href="#cnam" class="hover:text-paper transition-colors">Il CNAM e il XIX Collegio</a></li>
+                    </ul>
+                </div>
+
+                <!-- Colonna 3: Fonti istituzionali e normative -->
+                <div class="md:col-span-4">
+                    <div class="font-mono text-xs uppercase tracking-widest text-stone-400 mb-3">Riferimenti Istituzionali</div>
+                    <ul class="space-y-2 text-xs text-stone-400">
+                        <li>• Legge 21 dicembre 1999, n. 508 (Istituzione CNAM e riforma AFAM)</li>
+                        <li>• Decreto Ministeriale n. 128 (Reclutamento docenti AFAM)</li>
+                        <li>• <a href="https://www.mur.gov.it/it/aree-tematiche/afam" target="_blank" rel="noopener noreferrer" class="underline hover:text-paper">Ministero dell’Università e della Ricerca — Area AFAM</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-stone-500">
+                <div>Documento informativo di presentazione della candidatura di Candida Felici — Elezioni CNAM · XIX Collegio.</div>
+                <a href="#" class="text-stone-400 hover:text-paper transition-colors">Torna all’inizio ↑</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- =======================================================================
+         VANILLA JAVASCRIPT (Menu Mobile, Contatori KPI, Tab Programma)
+    ======================================================================= -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            /* 1. MENU MOBILE */
+            const mobileToggle = document.getElementById('mobile-toggle');
+            const mobileNav = document.getElementById('mobile-nav');
+            const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+
+            if (mobileToggle && mobileNav) {
+                mobileToggle.addEventListener('click', () => {
+                    const isHidden = mobileNav.classList.toggle('hidden');
+                    mobileToggle.setAttribute('aria-expanded', String(!isHidden));
+                });
+
+                mobileLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileNav.classList.add('hidden');
+                        mobileToggle.setAttribute('aria-expanded', 'false');
+                    });
+                });
+            }
+
+            /* 2. ANIMAZIONE CONTATORI METRICHE ALLO SCROLL */
+            const counters = document.querySelectorAll('.counter');
+            let countersAnimated = false;
+
+            const animateCounters = () => {
+                if (countersAnimated) return;
+                countersAnimated = true;
+
+                counters.forEach(counter => {
+                    const isPlain = counter.getAttribute('data-plain') === 'true';
+                    const target = parseInt(counter.getAttribute('data-target'), 10);
+                    const suffix = counter.getAttribute('data-suffix') || '';
+
+                    if (isPlain) {
+                        counter.textContent = target + suffix;
+                        return;
+                    }
+
+                    const duration = 1100;
+                    const startTime = performance.now();
+
+                    const updateCount = (currentTime) => {
+                        const elapsed = currentTime - startTime;
+                        const progress = Math.min(elapsed / duration, 1);
+                        const easeProgress = 1 - Math.pow(1 - progress, 3);
+                        const currentVal = Math.floor(easeProgress * target);
+
+                        counter.textContent = currentVal + (progress === 1 ? suffix : '');
+
+                        if (progress < 1) {
+                            requestAnimationFrame(updateCount);
+                        } else {
+                            counter.textContent = target + suffix;
+                        }
+                    };
+
+                    requestAnimationFrame(updateCount);
+                });
+            };
+
+            const metricsSection = document.getElementById('metriche');
+            if (metricsSection && 'IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            animateCounters();
+                            observer.disconnect();
+                        }
+                    });
+                }, { threshold: 0.25 });
+                observer.observe(metricsSection);
+            } else {
+                animateCounters();
+            }
+
+            /* 3. TAB INTERATTIVI DEL PROGRAMMA (3 Punti + Navigazione Frecce) */
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            const tabPanels = document.querySelectorAll('.tab-panel');
+
+            const activateTab = (tabBtn) => {
+                const targetId = tabBtn.getAttribute('data-tab');
+
+                tabButtons.forEach(btn => {
+                    btn.setAttribute('aria-selected', 'false');
+                    btn.classList.remove('bg-terracotta', 'text-paper', 'shadow-xs');
+                    btn.classList.add('bg-white', 'text-muted', 'border', 'border-borderwarm');
+                });
+
+                tabBtn.setAttribute('aria-selected', 'true');
+                tabBtn.classList.remove('bg-white', 'text-muted', 'border', 'border-borderwarm');
+                tabBtn.classList.add('bg-terracotta', 'text-paper', 'shadow-xs');
+
+                tabPanels.forEach(panel => {
+                    if (panel.id === `panel-${targetId}`) {
+                        panel.classList.remove('hidden');
+                        panel.classList.add('grid');
+                    } else {
+                        panel.classList.add('hidden');
+                        panel.classList.remove('grid');
+                    }
+                });
+            };
+
+            tabButtons.forEach((btn, index) => {
+                btn.addEventListener('click', () => activateTab(btn));
+
+                btn.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+                        e.preventDefault();
+                        const dir = e.key === 'ArrowRight' ? 1 : -1;
+                        const nextIndex = (index + dir + tabButtons.length) % tabButtons.length;
+                        tabButtons[nextIndex].focus();
+                        activateTab(tabButtons[nextIndex]);
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
